@@ -1,54 +1,74 @@
-# React + TypeScript + Vite
+# 🎨 AIMagica
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+**Note**: This project is a work in progress, all features are not fully implemented yet, but they are aim to be done.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+**AIMagica** is a creative AI-powered web application built with React that brings together three interactive tools in one beautiful interface:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 🖼️ **AI Pic Generator** — Generate unique images from text prompts
+- 😂 **AI Meme Generator** — Create fun, custom memes with AI assistance
+- 💬 **AI Quote Designer** — Design stylish quote graphics effortlessly
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+---
+
+## 🚀 What Is AIMagica?
+
+AIMagica aims to be a **playground for creativity**, powered by artificial intelligence. It provides users with a seamless way to:
+
+- Generate visual art from imagination
+- Craft memes in seconds using text prompts or templates
+- Design beautiful quote posters for inspiration or social sharing
+
+Whether you're an artist, a meme lover, or a quote enthusiast — AIMagica is your AI assistant for content creation.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React + TypeScript + Tailwind CSS
+- **Routing:** React Router
+- **APIs Used:** Free AI image/meme APIs
+
+---
+
+## 📁 Project Structure
+
+```bash
+/src
+  /components
+  /pages
+    - Home.tsx
+    - PicGenerator.tsx
+    - MemeGenerator.tsx
+    - QuoteDesigner.tsx
+  /assets
+  App.tsx
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🌟 Features
+- 🎨 Clean and modern UI with dark mode
+- ✨ Responsive and mobile-friendly design
+- ⚡ Fast generation with easy-to-use forms
+- 📥 Downloadable results (images, memes, quotes)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📌 Goals
+- Learn and showcase React + frontend UI skills
+- Build impressive AI-based tools
+- Create a standout portfolio project
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## 🧠 Inspiration
+The name **AIMagica** blends **AI** and **Magic** — representing the spark of creativity that AI can ignite when used the right way.
+
+
+## 🤝 Contributions
+
+Contributions are welcome! If you'd like to improve AIMagica, please:
+
+1. Fork the repository
+2. Create a new branch for your feature or fix
+3. Submit a pull request with a clear description
+
+Feel free to open issues for suggestions or bug reports.
