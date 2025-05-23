@@ -6,7 +6,7 @@ import { createBrowserRouter,RouterProvider } from 'react-router-dom';
 
 import App from './App.tsx';
 import Home from './pages/Home.tsx';
-import PicGenerator from './pages/PicGenerator.tsx'
+import ImageGenerator from './pages/ImageGenerator.tsx'
 import QuoteDesigner from './pages/QuoteDesigner.tsx'
 import MemeGenerator from './pages/MemeGenerator.tsx'
 
@@ -23,8 +23,8 @@ const router = createBrowserRouter([
     element: <Home />
   },
   {
-    path: "/pic",
-    element: <PicGenerator />,
+    path: "/image",
+    element: <ImageGenerator />,
   },
   {
     path: "/quote",
