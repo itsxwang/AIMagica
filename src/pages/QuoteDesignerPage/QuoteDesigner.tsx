@@ -38,7 +38,6 @@ export default function QuoteDesigner() {
       setError('');
       controllerRef.current = new AbortController();
 
-      // currentlt keep it off, save api calls
       fetch(`https://api.jsongpt.com/json?prompt=${prompt}&quotes=only 1 quote in string format`, {
         signal: controllerRef.current.signal
       })
@@ -46,8 +45,8 @@ export default function QuoteDesigner() {
         .then(data => {
           const newQuote = data.quotes;
           setQuote(newQuote);
-          setHistory(prev => [{ id: historyId.current++, prompt, quote: newQuote }, ...prev]); // Store prompt and quote
-          localStorage.setItem('historyId', historyId.current.toString());
+          setHistory(prev => [{ id: historyId.current, prompt, quote: newQuote }, ...prev]); // Store prompt and quote
+          localStorage.setItem('historyId', (historyId.current + 1).toString());
           setIsLoading(false);
         })
         .catch(err => {
@@ -62,7 +61,7 @@ export default function QuoteDesigner() {
     }
   }
 
-  function handlePauseGeneration(e: React.MouseEvent<HTMLSpanElement>) {
+  function handleStopGeneration(e: React.MouseEvent<HTMLSpanElement>) {
     e.stopPropagation();
     if (isLoading) {
       controllerRef.current?.abort();
@@ -120,7 +119,7 @@ export default function QuoteDesigner() {
               onClick={handleGenerateQuote}
             >
               {isLoading ? (
-                <span className="inline-flex items-center gap-2" onClick={handlePauseGeneration}>
+                <span className="inline-flex items-center gap-2" onClick={handleStopGeneration}>
                   Generating...
                   <FaStopCircle className="animate-spin" style={{ width: "24px", height: "24px" }} />
                 </span>

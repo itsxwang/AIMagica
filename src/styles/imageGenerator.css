@@ -1,0 +1,7 @@
+
+/* for big screens */
+@media (min-width: 550px) and (min-height: 550px) {
+    .custom-st-container {
+        gap: 1rem;
+    }
+}
