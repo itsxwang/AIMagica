@@ -5,10 +5,10 @@ import './styles/index.css'
 import { createBrowserRouter,RouterProvider } from 'react-router-dom';
 
 import App from './App.tsx';
-import Home from './pages/Home.tsx';
-import ImageGenerator from './pages/ImageGenerator.tsx'
-import QuoteGenerator from './pages/QuoteDesigner.tsx'
-import MemeGenerator from './pages/MemeGenerator.tsx'
+import Home from './pages/Home/Home.tsx';
+import ImageGenerator from './pages/ImageGenerator/ImageGenerator.tsx'
+import QuoteGenerator from './pages/QuoteDesignerPage/QuoteDesigner.tsx'
+import MemeGenerator from './pages/MemeGenerator/MemeGenerator.tsx'
 
 
 

@@ -1,8 +1,8 @@
-import FeatureCard from '../components/FeatureCard'
-import '../styles/home.css'
+import FeatureCard from '../../components/FeatureCard'
+import '../../styles/home.css'
 
 
-function Home() {
+export default function Home() {
 
   return (
     <>
@@ -55,5 +55,3 @@ function Home() {
     </>
   )
 }
-
-export default Home
