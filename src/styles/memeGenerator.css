@@ -1,0 +1,13 @@
+
+/* handle screens where home icon overlapping the title  */
+@media (max-width: 550px) and (max-height: 800px) {
+    .custom-st-container {
+        gap: 0.1rem;
+    }
+    
+    .custom-st-heading {
+        margin-top: 1.7rem;
+        font-size: 1.7rem;
+    }
+    
+}

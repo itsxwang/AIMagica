@@ -9,8 +9,8 @@
 **AIMagica** is a creative AI-powered web application built with React that brings together three interactive tools in one beautiful interface:
 
 - 🖼️ **AI Image Generator** — Generate unique images from text prompts
-- 😂 **AI Meme Generator** — Create fun, custom memes with AI assistance
-- 💬 **AI Quote Designer** — Design stylish quote graphics effortlessly
+- 😂 **AI Meme Generator** — Create fun, custom memes with AI assistance (currently not integrated with real API, will if find one)
+- 💬 **AI Quote Designer** — Design stylish quote graphics effortlessly (currently not integrated with real API, will if find one)
 
 ---
 

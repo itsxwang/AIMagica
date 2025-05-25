@@ -3,6 +3,8 @@
   font-family: 'Poppins', sans-serif;
 }
 
+.custom-st-theme-selector {}
+
 /* some home page media queries */
 @media (max-width: 700px) {
     .custom-st-heading {
@@ -18,4 +20,14 @@
     .custom-st-para {
         font-size: 1rem;
     }
+
+    .custom-st-theme-selector {
+        top: 7px;
+        right: 3.7px;
+    }
+    .custom-st-theme-options {
+        width: 7.6rem;
+    }
+    
 }
+
