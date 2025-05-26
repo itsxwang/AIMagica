@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react';
 import '../../styles/quote.css';
 
+import { v4 as uuidv4 } from 'uuid';
+
 import useTheme from '../../hooks/useTheme';
 import useLocalStorage from '../../hooks/localStorage';
 
@@ -19,19 +21,12 @@ export default function QuoteDesigner() {
   const [quote, setQuote] = useLocalStorage<string>('quote', '');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
-  const [history, setHistory] = useLocalStorage<{ id: number; prompt: string; quote: string }[]>('quoteHistory', []);
+  const [history, setHistory] = useLocalStorage<{ id: string; prompt: string; quote: string }[]>('quoteHistory', []); 
   const [showHistory, setShowHistory] = useState<boolean>(false);
-
-  const controllerRef = useRef<AbortController | null>(null);
-  const historyId = useRef<number>(
-    (() => {
-      const storedHistoryId = localStorage.getItem('historyId');
-      return storedHistoryId ? parseInt(storedHistoryId) : 1;
-    })()
-  )
-
+  const controllerRef = useRef<AbortController | null>(new AbortController());
+  
   function handleGenerateQuote() {
-    if (prompt) {
+    if (prompt.trim() && !isLoading) {
       setIsLoading(true);
       setError('');
       controllerRef.current = new AbortController();
@@ -43,8 +38,9 @@ export default function QuoteDesigner() {
         .then(data => {
           const newQuote = data.quotes;
           setQuote(newQuote);
-          setHistory(prev => [{ id: historyId.current, prompt, quote: newQuote }, ...prev]);
-          localStorage.setItem('historyId', (historyId.current + 1).toString());
+
+          setHistory(prev => [{ id: uuidv4(), prompt, quote: newQuote }, ...prev]);
+
           setIsLoading(false);
         })
         .catch(err => {
@@ -54,6 +50,25 @@ export default function QuoteDesigner() {
           setIsLoading(false);
         });
 
+      // fake api for testing
+      // -----------------------------------
+      
+      // setTimeout(() => {
+      //   if (controllerRef.current?.signal.aborted) {
+      //     controllerRef.current = new AbortController();
+      //     return;
+      //   };
+      //   console.log(controllerRef.current)
+      //   const newQuote = Math.random() < 0.5 ? 'Hello World!' : 'Stay Inspired!';
+      //   setQuote(newQuote);
+      //   setHistory(prev => [{ id:uuidv4(), prompt, quote: newQuote }, ...prev]);
+      //   setHistoryId(historyId + 1);
+      //   setIsLoading(false);
+
+      // }, 1000);
+
+      // -----------------------------------
+      
     } else {
       setQuote('Stay Inspired!');
     }
@@ -62,6 +77,7 @@ export default function QuoteDesigner() {
   function handleStopGeneration(e: React.MouseEvent<HTMLSpanElement>) {
     e.stopPropagation();
     if (isLoading) {
+      // console.log('Aborting generation...');
       controllerRef.current?.abort();
       setIsLoading(false);
     }
@@ -97,7 +113,7 @@ export default function QuoteDesigner() {
         <div className={`group p-8 rounded-xl shadow-lg w-full max-w-2xl text-center text-2xl md:text-3xl font-medium italic border min-h-[150px] flex items-center justify-center relative ${cardBg}`}>
           {!error ? quote : <span className="text-red-400 font-semibold">{error}</span>}
           <button
-            className="absolute right-4 bottom-4 sm:text-transparent hover:text-blue-400 group-hover:text-current transition active:scale-50"
+            className="absolute right-4 bottom-4 sm:text-transparent hover:text-blue-400 group-hover:text-current transition cursor-pointer"
             aria-label="Copy quote"
             onClick={() => handleCopyQuote(quote)}
             type="button"
@@ -124,12 +140,12 @@ export default function QuoteDesigner() {
               onClick={handleGenerateQuote}
             >
               {isLoading ? (
-          <span className="inline-flex items-center gap-2 hover:cursor-pointer" onClick={handleStopGeneration}>
-            Generating...
-            <FaStopCircle className="animate-spin" style={{ width: "24px", height: "24px" }} />
-          </span>
+                <span className="inline-flex items-center gap-2 hover:cursor-pointer" onClick={handleStopGeneration}>
+                  Generating...
+                  <FaStopCircle className="animate-spin" style={{ width: "24px", height: "24px" }} />
+                </span>
               ) : (
-          'Generate Quote'
+                'Generate Quote'
               )}
             </button>
 
@@ -145,7 +161,7 @@ export default function QuoteDesigner() {
 
       {/* Modal Overlay */}
       {showHistory && (
-        <QuoteAndPromptHistory {...{ setShowHistory, setPrompt, history, setHistory, handleCopyQuote,resolvedTheme }} />
+        <QuoteAndPromptHistory {...{ setShowHistory, setPrompt, history, setHistory, handleCopyQuote, resolvedTheme }} />
       )}
     </>
   );

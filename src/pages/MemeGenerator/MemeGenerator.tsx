@@ -27,7 +27,7 @@ export default function MemeGenerator() {
       setTimeout(() => {
         setMemeUrl(defaultMeme);
         setIsLoading(false);
-      }, 3500);
+      }, 1000);
     }
   };
 

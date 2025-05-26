@@ -12,8 +12,8 @@ export default function QuoteAndPromptHistory(
     {
       setShowHistory: React.Dispatch<React.SetStateAction<boolean>>,
       setPrompt: React.Dispatch<React.SetStateAction<string>>,
-      history: { id: number, prompt: string, quote: string }[],
-      setHistory: React.Dispatch<React.SetStateAction<{ id: number, prompt: string, quote: string }[]>>,
+      history: { id: string, prompt: string, quote: string }[],
+      setHistory: React.Dispatch<React.SetStateAction<{ id: string, prompt: string, quote: string }[]>>,
       handleCopyQuote: (text: string) => void,
       resolvedTheme: 'light' | 'dark'
     }) {
@@ -26,7 +26,7 @@ export default function QuoteAndPromptHistory(
     setShowHistory(false);
   }
 
-  function handleDeletePrompt(id: number) {
+  function handleDeletePrompt(id: string) {
     const updatedHistory = history.filter(item => item.id !== id);
     setHistory(updatedHistory);
   }
@@ -112,7 +112,7 @@ export default function QuoteAndPromptHistory(
                 <div className={`text-sm mb-1 max-h-24 overflow-y-auto break-words whitespace-pre-line pr-2 ${theme.prompt}`}>
                   Prompt: {item.prompt}{' '}
                   <BsArrowReturnRight
-                    className={`inline-block transition-all w-6.5 h-6.5 rounded-full p-[0.7px] active:scale-50 sm:text-transparent group-hover:text-inherit ${theme.bsrightArrow}`}
+                    className={`inline-block transition-all w-6.5 h-6.5 rounded-full p-[0.7px] active:scale-50 sm:text-transparent group-hover:text-inherit ${theme.bsrightArrow} cursor-pointer`}
                     onPointerDown={() => handleInsertPrompt(item.prompt)}
                   />
                 </div>
@@ -123,21 +123,21 @@ export default function QuoteAndPromptHistory(
 
                   {/* Copy, Delete Button */}
                   <div className="flex gap-2">
-                    <button
-                      className={`active:scale-50 transition-all duration-100 sm:text-transparent  ${theme.copyBtn}`}
+                    <p
+                      className={`transition-all duration-100 sm:text-transparent  ${theme.copyBtn} cursor-pointer`}
                       onClick={() => handleCopyQuote(item.quote)}
                       title="Copy quote"
                     >
                       <FaRegCopy className="text-2xl" />
-                    </button>
-
-                    <button
-                      className={`active:scale-50 transition-all duration-100 sm:text-transparent  ${theme.deleteBtn}`}
+                    </p>
+                  
+                    <p
+                      className={`transition-all duration-100 sm:text-transparent  ${theme.deleteBtn} cursor-pointer`}
                       onClick={() => handleDeletePrompt(item.id)}
                       title="Delete prompt"
                     >
                       <RiDeleteBin6Line className="text-2xl" />
-                    </button>
+                    </p>
                   </div>
 
                 </div>
