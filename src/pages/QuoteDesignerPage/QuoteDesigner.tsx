@@ -1,7 +1,10 @@
 import { useRef, useState } from 'react';
 import '../../styles/quote.css';
 
+import useTypingEffect from '../../hooks/typingEffect';
+
 import { v4 as uuidv4 } from 'uuid';
+
 
 import useTheme from '../../hooks/useTheme';
 import useLocalStorage from '../../hooks/localStorage';
@@ -15,16 +18,17 @@ import { FaHistory } from "react-icons/fa";
 import LinkToHome from '../../components/LinkToHome';
 
 export default function QuoteDesigner() {
+  const placeholderText = useTypingEffect(['Generate a Quote on lamborghini', 'Nicola Tesla Quote','Dr. Strange Quote, that starts from word `Dormammu` '  ], 55, 3000);
   const { resolvedTheme } = useTheme();  // <-- using resolvedTheme directly
 
   const [prompt, setPrompt] = useLocalStorage<string>('prompt', '');
   const [quote, setQuote] = useLocalStorage<string>('quote', '');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
-  const [history, setHistory] = useLocalStorage<{ id: string; prompt: string; quote: string }[]>('quoteHistory', []); 
+  const [history, setHistory] = useLocalStorage<{ id: string; prompt: string; quote: string }[]>('quoteHistory', []);
   const [showHistory, setShowHistory] = useState<boolean>(false);
   const controllerRef = useRef<AbortController | null>(new AbortController());
-  
+
   function handleGenerateQuote() {
     if (prompt.trim() && !isLoading) {
       setIsLoading(true);
@@ -52,7 +56,7 @@ export default function QuoteDesigner() {
 
       // fake api for testing
       // -----------------------------------
-      
+
       // setTimeout(() => {
       //   if (controllerRef.current?.signal.aborted) {
       //     controllerRef.current = new AbortController();
@@ -68,7 +72,7 @@ export default function QuoteDesigner() {
       // }, 1000);
 
       // -----------------------------------
-      
+
     } else {
       setQuote('Stay Inspired!');
     }
@@ -128,7 +132,7 @@ export default function QuoteDesigner() {
             className={`w-full p-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none overflow-auto ${inputBg} ${placeholderColor}`}
             rows={1}
             style={{ minHeight: '58px', maxHeight: '58px' }}
-            placeholder="Enter your inspiration..."
+            placeholder={placeholderText}
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             spellCheck={false}

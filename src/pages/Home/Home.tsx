@@ -4,8 +4,10 @@ import '../../styles/home.css';
 import useTheme  from '../../hooks/useTheme';
 import ThemeSelector from './ThemeSelector';
 
+import useTypingEffect from '../../hooks/typingEffect';
 
 export default function Home() {
+  const typedText = useTypingEffect(['Prompt Your Ideas','Generate Unique Images','Generate Hilarious Memes', 'Design Beautiful Quotes'], 55,3500);
 
   const { theme, setTheme, resolvedTheme } = useTheme();
   const containerClasses = resolvedTheme === 'dark'
@@ -22,7 +24,12 @@ export default function Home() {
 
         {/* Title and Tagline */}
         <div className='flex flex-col items-center'>
-          <h1 className="custom-st-heading text-5xl font-bold mb-4 text-center">Let's Do AI Some Magic🪄</h1>
+          <h1 className="custom-st-heading text-5xl font-bold mb-4 text-center">
+              <>
+                {typedText.slice(0, -1)}
+                <span className='font-light'>{typedText.slice(-1)}</span>
+              </>
+          </h1>
           <p className="custom-st-para text-lg md:text-xl text-center max-w-2xl text-gray-500 dark:text-gray-400">
             Unleash your creativity with AI-powered tools. Generate unique images, hilarious memes, and beautifully styled quotes — all in one place.
           </p>
